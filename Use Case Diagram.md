@@ -17,3 +17,4 @@ graph LR
     %% Actor Connections
     Professor --> UC_Input
     Professor --> UC_Search
+```

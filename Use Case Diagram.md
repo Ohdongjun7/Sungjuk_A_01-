@@ -1,4 +1,4 @@
-```
+```mermaid
 graph LR
     %% Actors
     Professor((교수))

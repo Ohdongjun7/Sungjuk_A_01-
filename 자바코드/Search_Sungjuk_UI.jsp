@@ -10,22 +10,25 @@
     int security = Integer.parseInt(request.getParameter("security"));
 
     // 2. 객체 생성
-    교수 professor = new 교수(profId);
-    성적 score = new 성적();
-    
+    교수 professor = new 교수(profId); // 교수 객체 생성
+    성적 score = new 성적();           // 성적 객체 생성
     String message = "";
+    
     String gradeResult = "";
     boolean isSuccess = false;
 
-    // 3. 비즈니스 로직 수행 (Sequence Diagram 흐름)
+    // 1. 교수 객체의 함수를 직접 사용
     if (professor.교수체크(profId)) {
-        // 교수 인증 성공
-        score.성적입력(profId, studentId, java, db, security);
-        gradeResult = score.학점조회(profId);
+        
+        // 2. 성적 객체에 교수 객체(professor)를 전달하여 내부에서 체크하게 함
+        score.성적입력(professor, profId, studentId, java, db, security);
+        
+        // 3. 학점 조회 시에도 교수 객체 전달
+        gradeResult = score.학점조회(professor, profId);
+        
         isSuccess = true;
     } else {
-        // 교수 인증 실패
-        message = "교수 ID를 확인하세요. (인증 실패)";
+      message = "교수 ID를 확인하세요. (인증 실패)";
     }
 %>
 

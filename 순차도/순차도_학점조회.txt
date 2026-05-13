@@ -1,0 +1,33 @@
+```mermaid
+
+sequenceDiagram
+    actor User as 교수 (Actor)
+    participant UI as Search_Sunjuk_UI <<boundary>>
+    participant Prof as 교수 <<entity>>
+    participant Score as 성적 <<entity>>
+
+    User->>UI: 학점 조회 요청 (교수id: String, 학생id: String)
+    activate UI
+    
+    UI->>Prof: 교수체크(교수id: String)
+    activate Prof
+    Note over Prof: 교수id == "inha" 여부 확인
+    Prof-->>UI: 체크 결과 (result: Boolean)
+    deactivate Prof
+
+    alt 체크 결과가 True인 경우
+        UI->>Score: 학점조회(학생id: String)
+        activate Score
+        Note over Score: 1. 총점 및 평균 계산<br/>2. 학점 부여 (A: >=90, B: >=80, C: <80)
+        Score-->>UI: 학점 결과 반환 (학점: String)
+        deactivate Score
+        UI-->>User: 학생 학점 정보 출력
+    else 체크 결과가 False인 경우
+        UI-->>User: "교수 인증에 실패하였습니다." 메시지 출력
+    end
+
+    deactivate UI
+
+
+
+

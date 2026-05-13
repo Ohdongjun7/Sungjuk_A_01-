@@ -1,4 +1,4 @@
-```
+```mermaid
 graph LR
     %% Actors
     Professor((교수))
@@ -17,4 +17,3 @@ graph LR
     %% Actor Connections
     Professor --> UC_Input
     Professor --> UC_Search
-```
